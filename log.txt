@@ -93,3 +93,15 @@ URL: /favicon.ico
 Timestamp: Mon Apr 17 2023 22:01:40 GMT+0200 (Central European Summer Time)
 >>>>>>> Stashed changes
 
+URL: /
+Timestamp: Tue Apr 18 2023 10:59:09 GMT+0200 (Central European Summer Time)
+
+URL: /favicon.ico
+Timestamp: Tue Apr 18 2023 10:59:09 GMT+0200 (Central European Summer Time)
+
+URL: /documentation
+Timestamp: Tue Apr 18 2023 10:59:13 GMT+0200 (Central European Summer Time)
+
+URL: /favicon.ico
+Timestamp: Tue Apr 18 2023 10:59:13 GMT+0200 (Central European Summer Time)
+
