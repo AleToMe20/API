@@ -150,3 +150,15 @@ Timestamp: Tue Apr 18 2023 12:16:40 GMT+0200 (Central European Summer Time)
 URL: /favicon.ico
 Timestamp: Tue Apr 18 2023 12:16:40 GMT+0200 (Central European Summer Time)
 
+URL: /
+Timestamp: Wed Apr 19 2023 13:43:55 GMT+0200 (Central European Summer Time)
+
+URL: /favicon.ico
+Timestamp: Wed Apr 19 2023 13:43:55 GMT+0200 (Central European Summer Time)
+
+URL: /documentation
+Timestamp: Wed Apr 19 2023 13:43:58 GMT+0200 (Central European Summer Time)
+
+URL: /favicon.ico
+Timestamp: Wed Apr 19 2023 13:44:00 GMT+0200 (Central European Summer Time)
+
