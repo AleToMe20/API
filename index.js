@@ -1,36 +1,40 @@
-const http = require('http'),
-  fs = require('fs'),
-  url = require('url');
+const express = require('express');
+const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path');
+const app = express();
 
-http.createServer((request, response) => {
-  let addr = request.url,
-    q = url.parse(addr, true),
-    filePath = '';
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
+app.use(morgan('combined', {stream: accessLogStream}));
 
-  fs.appendFile('log.txt', 'URL: ' + addr + '\nTimestamp: ' + new Date() + '\n\n', (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Added to log.');
-    }
+app.use(express.static('public'));
+app.use(morgan('common'));
+
+app.get('/movies', (req, res) => {
+    let myTenMovies = [
+        { title: 'Lord of the rings', director: 'Peter Jackson', year: 2001 },
+        { title: 'Harry Potter and the Philosophers Stone', director: 'Chris Columbus',  year: 2001 },
+        { title: 'AIR', director: 'Agnès Varda', year: 2023 },
+        { title: 'DUNGEONS & DRAGONS: HONOR AMONG THIEVES', director: 'Jonathan M. Goldstein',  year: 2023 },
+        { title: 'SUZUME', director: 'Makoto Shinkai',  year: 2022 },
+        { title: 'JOHN WICK: CHAPTER 4', director: 'Chad Stahelski',  year: 2023 },
+        { title: 'THE LAST KINGDOM: SEVEN KINGS MUST DIE', director: 'Edward Bazalgette', year: 2023 },
+        { title: '65', director: ' Scott Beck, Bryan Woods', year: 2023 },
+        { title: 'SHAZAM! FURY OF THE GODS', director: 'David F. Sandberg', year: 2023 },
+        { title: 'Fight Club', director: 'David Fincher', year: 1999 }
+      ];
+      res.json(myTenMovies);
+});
+
+app.get('/', (req, res) => {
+    res.send('Welcome to my movie API!');
   });
 
-  if (q.pathname.includes('/documentation')) {
-    filePath = (__dirname + '/documentation.html');
-  } else {
-    filePath = 'index.html';
-  }
-
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
-      throw err;
-    }
-
-    response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.write(data);
-    response.end();
-
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something Error!');
   });
 
-}).listen(8080);
-console.log('My test server is running on Port 8080.');
+  app.listen(8080, () => {
+    console.log('Server listening on port 8080');
+  });
