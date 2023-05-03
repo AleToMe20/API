@@ -3,9 +3,86 @@
 <head>
 <meta charset="utf-8">
 <title>Index</title>
+<style>
+    table, th, td {
+      border: 1px solid;
+    }
+</style>
 </head>
 <body>
-<h1> DOCUMENTATION</h1>
-<p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit unde minus velit quasi nihil veniam commodi consequuntur, suscipit natus facilis atque in mollitia consectetur recusandae sed voluptates officia tempore sapiente?</p>
+
+<h1>Documentation Page</h1>
+<h4>INSTRUCTIONS:</h4>
+    <p>This app is designed to navigate you in the world of best movies made!</p>
+    <p>Here you will find information about different movies, directors, and genres. </p>
+    <p>You can sign up, update personal info, and create a list of favorite movies. </p>
+<h4>ENDPOINT DOCUMENTATION:</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Request</th>
+            <th>URL</th>
+            <th>HTTP Method</th>
+            <th>Response</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Return a list of ALL movies to the user</td>
+            <td>/movies</td>
+            <td>GET</td>
+            <td>a JSON object holding data about all movies</td>
+        </tr>
+        <tr>
+            <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
+            <td>/movies/title</td>
+            <td>GET</td>
+            <td>a JSON object holding data about a single movie containing the data above</td>
+        </tr>
+        <tr>
+            <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
+            <td>/movies/title/genreName</td>
+            <td>GET</td>
+            <td>JSON object holding data about genre</td>
+        </tr>
+        <tr>
+            <td>Return data about a director (bio, birth year, death year) by name</td>
+            <td>/movies/title/directorName</td>
+            <td>GET</td>
+            <td>JSON object holding data about director</td>
+        </tr>
+        <tr>
+            <td>Allow new users to register</td>
+            <td>/users</td>
+            <td>POST</td>
+            <td>a text message indicating successfull registration of the account</td>
+        </tr>
+        <tr>
+            <td>Allow users to update their user info (username)</td>
+            <td>/users/id</td>
+            <td>PUT</td>
+            <td>a text saying the info got updated</td>
+        </tr>
+        <tr>
+            <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)</td>
+            <td>/users/id/favoriteMovieTitle</td>
+            <td>POST</td>
+            <td>a text message that movie was added to favorite list</td>
+        </tr>
+        <tr>
+            <td>Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)</td>
+            <td>/users/id/favoriteMovieTitle
+            </td>
+            <td>DELETE</td>
+            <td>text message that movie was removed from favorites list</td>
+        </tr>
+        <tr>
+            <td>Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)</td>
+            <td>/users/id</td>
+            <td>DELETE</td>
+            <td>a text message indicating successfull deletion of the user account</td>
+        </tr>
+    </tbody>
+</table>
 </body>
 </html>
