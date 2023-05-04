@@ -99,7 +99,7 @@ app.put('/users/:id', (req, res) => {
  })
 
  // CREATE
- app.post('/users/:id/:favoriteMovieTitle', (req,res)=>{
+ app.patch('/users/:id/favorites/:movieTitle', (req,res)=>{
   const{id, favoriteMovieTitle}=req.params;
 
   let user=users.find(user=>user.id == id);
@@ -112,7 +112,6 @@ app.put('/users/:id', (req, res) => {
       res.status(400).send('movie not added');
   }
 });
-
 
   // DELETE
 app.delete('/users/:id/:movieTitle', (req, res) => {
