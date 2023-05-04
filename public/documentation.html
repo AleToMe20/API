@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td>Return data about a director (bio, birth year, death year) by name</td>
-            <td>/movies/title/directorName</td>
+            <td>/movies/director/directorName</td>
             <td>GET</td>
             <td>JSON object holding data about director</td>
         </tr>
@@ -65,13 +65,13 @@
         </tr>
         <tr>
             <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)</td>
-            <td>/users/id/favoriteMovieTitle</td>
-            <td>POST</td>
+            <td>/users/id/favorites/movieTitle</td>
+            <td>PATCH</td>
             <td>a text message that movie was added to favorite list</td>
         </tr>
         <tr>
             <td>Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)</td>
-            <td>/users/id/favoriteMovieTitle
+            <td>/users/id/favorites/movieTitle
             </td>
             <td>DELETE</td>
             <td>text message that movie was removed from favorites list</td>

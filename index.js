@@ -114,7 +114,7 @@ app.put('/users/:id', (req, res) => {
 });
 
   // DELETE
-app.delete('/users/:id/:movieTitle', (req, res) => {
+app.delete('/users/:id/favorites/:movieTitle', (req, res) => {
   const { id, movieTitle } = req.params;  
   let user = users.find( user => user.id == id);
     if (user) {
