@@ -15,7 +15,11 @@ mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true
 const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
+
 app.use(morgan("combined", { stream: accessLogStream }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 // CREATE - Add a user
 app.post('/users', (req, res) => {
@@ -43,7 +47,6 @@ app.post('/users', (req, res) => {
       res.status(500).send('Error: ' + error);
     });
 });
-
 // Get all users
 app.get('/users', (req, res) => {
   Users.find()
@@ -71,10 +74,10 @@ app.get('/users/:username', (req, res) => {
 //updates a account holders information
 app.put('/users/:username', (req, res) => {
   Users.findOneAndUpdate(
-    { username: req.params.username },
+    { Username: req.params.Username },
     {
       $set: {
-        Username: req.body.username,
+        Username: req.body.Username,
         Password: req.body.Password,
         Email: req.body.Email,
         Birthday: req.body.Birthday
