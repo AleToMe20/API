@@ -113,19 +113,26 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
   });
 });
 
-// DELETE - Remove a movie from a user's list of favorites
-app.delete("/users/:id/favorites/:movieID", (req, res) => {
-  const { id, movieTitle } = req.params;
-  Users.findByIdAndUpdate(id, {
-    $pull: { FavoriteMovies: movieTitle }
-  }, { new: true })
-    .then((updatedUser) => {
-      res.status(200).send(`${movieTitle} has been removed from user ${id}'s favorites.`);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
+// Remove a movie to a user's list of favorites
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+	Users.findOneAndUpdate(
+		{ username: req.params.username },
+		{
+			$pull: { favoriteMovies: req.params.MovieID },
+		},
+		{ new: true }
+	)
+		.then((updatedUser) => {
+			if (!updatedUser) {
+				return res.status(404).send('Error: User not found');
+			} else {
+				res.json(updatedUser);
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+			res.status(500).send('Error: ' + error);
+		});
 });
 
 // DELETE - Delete a user by username
@@ -173,35 +180,26 @@ app.get("/movies/:title", (req, res) => {
 });
 
 // READ - Get a genre by name
-app.get("/movies/genre/:genrename", (req, res) => {
-  Movies.find({ "genre.name": { $regex: new RegExp(req.params.genrename, "i") } })
-    .then((genre) => {
-      if (!genre || genre.length === 0) {
-        res.status(400).send("No such genre");
-      } else {
-        res.status(200).json(genre);
-      }
+app.get('/movies/genre/:genrename', (req, res) => {
+  Movies.find({ 'genre.name': req.params.genrename })
+    .then((movies) => {
+      res.status(200).json(movies);
     })
     .catch((err) => {
-      console.error(err);
       res.status(500).send('Error: ' + err);
     });
 });
 
 // READ - Get a director by name
-app.get("/movies/director/:directorname", (req, res) => {
-  Movies.find({ "director.name": req.params.directorname })
-    .then((director) => {
-      if (!director || director.length === 0) {
-        res.status(400).send("No such director");
-      } else {
-        res.status(200).json(director);
-      }
+app.get('/movies/directors/:directorsName', (req, res) => {
+  Movies.find({ 'director.name': req.params.directorsName })
+    .then((movies) => {
+      res.status(200).json(movies);
     })
     .catch((err) => {
-      console.error(err);
       res.status(500).send('Error: ' + err);
     });
 });
+
 
 app.listen(8080, () => console.log("Server listening on port 8080"));

@@ -76,14 +76,14 @@
           <td>/users</td>
           <td>POST</td>
           <td>
-            a text message indicating successfull registration of the account
+            A JSON object of the new user
           </td>
         </tr>
         <tr>
           <td>Allow users to update their user info (username)</td>
           <td>/users/:username</td>
           <td>PUT</td>
-          <td>a text saying the info got updated</td>
+          <td>A JSON object of the updated users</td>
         </tr>
         <tr>
           <td>
@@ -92,7 +92,7 @@
           </td>
           <td>/users/:Username/movies/:MovieID</td>
           <td>POST</td>
-          <td>a text message that movie was added to favorite list</td>
+          <td>A JSON object incl. the new favorite movie</td>
         </tr>
         <tr>
           <td>
@@ -101,7 +101,7 @@
           </td>
           <td>/users/:id/favorites/:movieID</td>
           <td>DELETE</td>
-          <td>text message that movie was removed from favorites list</td>
+          <td>A JSON object incl the deleted message</td>
         </tr>
         <tr>
           <td>
