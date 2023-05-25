@@ -24,6 +24,7 @@ let userSchema = mongoose.Schema({
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
+
 let Movie = mongoose.model('Movie', movieSchema);
 let User = mongoose.model('User', userSchema);
 

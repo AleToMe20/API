@@ -9,6 +9,8 @@ const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const Genres = Models.Genre;
+const Directors = Models.Director;
 
 mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -19,7 +21,6 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 // CREATE - Add a user
 app.post('/users', (req, res) => {
@@ -180,25 +181,38 @@ app.get("/movies/:title", (req, res) => {
 });
 
 // READ - Get a genre by name
-app.get('/movies/genre/:genrename', (req, res) => {
-  Movies.find({ 'genre.name': req.params.genrename })
-    .then((movies) => {
-      res.status(200).json(movies);
+app.get("/movies/genre/:name", (req, res) => {
+  Movies.findOne({ "genre.name": req.params.name }).exec()
+    .then((movie) => {
+      if (!movie) {
+        res.status(404).send('Not found');
+      } else {
+        console.log(movie.toObject().genre)
+        res.json(movie.toObject().genre);
+      }
     })
     .catch((err) => {
+      console.error(err);
       res.status(500).send('Error: ' + err);
     });
 });
 
+
 // READ - Get a director by name
-app.get('/movies/directors/:directorsName', (req, res) => {
-  Movies.find({ 'director.name': req.params.directorsName })
-    .then((movies) => {
-      res.status(200).json(movies);
-    })
-    .catch((err) => {
-      res.status(500).send('Error: ' + err);
-    });
+app.get('/movies/director/:Name', (req, res) => {
+  Movies.findOne({ "directors.name": req.params.name }).exec()
+  .then((movie) => {
+    if (!movie) {
+      res.status(404).send('Not found');
+    } else {
+      console.log(movie.toObject().director)
+      res.json(movie.toObject().director);
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
 
 
