@@ -13,7 +13,6 @@ const Genres = Models.Genre;
 const Directors = Models.Director;
 
 mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });
-
 const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
@@ -21,6 +20,10 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+let auth = require('./auth.js')(app);
+const passport = require('passport.js');
+require('./passport.js');
 
 // CREATE - Add a user
 app.post('/users', (req, res) => {
@@ -62,7 +65,7 @@ app.get('/users', (req, res) => {
 
 // Get a user by username
 app.get('/users/:username', (req, res) => {
-  Users.findOne({ username: req.params.username })
+  Users.findOne({ Username: req.params.username })
     .then((user) => {
       res.status(200).json(user);
     })
@@ -117,7 +120,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 // Remove a movie to a user's list of favorites
 app.delete('/users/:Username/movies/:MovieID', (req, res) => {
 	Users.findOneAndUpdate(
-		{ username: req.params.username },
+		{ Username: req.params.Username },
 		{
 			$pull: { favoriteMovies: req.params.MovieID },
 		},
@@ -153,7 +156,7 @@ app.delete('/users/:username', (req, res) => {
 });
 
 // READ - Get all movies
-app.get("/movies", (req, res) => {
+app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(200).json(movies);
