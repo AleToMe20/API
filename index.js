@@ -13,8 +13,10 @@ const Movies = Models.Movie;
 const Users = Models.User;
 const Genres = Models.Genre;
 const Directors = Models.Director;
+const databaseUrl = "mongodb://localhost:27017/myFlixDB" 
 
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI || databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+
 // Parsing incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,6 +31,9 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
 });
 app.use(morgan("combined", { stream: accessLogStream }));
 
+app.get('/', (req, res) => {
+  res.send("Welcome to my api") 
+});
 // CREATE - Add a user
 app.post('/users',
   // Validation logic here for request
@@ -78,7 +83,7 @@ app.post('/users',
   });
 
 // Get all users
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.find()
     .then((Users) => {
       res.status(200).json(Users);
