@@ -34,6 +34,10 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.get('/', (req, res) => {
   res.send("Welcome to my api") 
 });
+
+// Serve static files from the 'public' folder
+app.use(express.static('public'));
+
 // CREATE - Add a user
 app.post('/users',
   // Validation logic here for request
