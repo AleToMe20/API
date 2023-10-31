@@ -1166,3 +1166,5 @@ Timestamp: Wed Apr 19 2023 13:44:00 GMT+0200 (Central European Summer Time)
 127.0.0.1 - - [30/Aug/2023:11:35:11 +0000] "GET /movies HTTP/1.1" 200 2 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
 127.0.0.1 - - [30/Aug/2023:11:35:20 +0000] "GET /movies HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
 127.0.0.1 - - [30/Aug/2023:11:42:40 +0000] "GET /movies HTTP/1.1" 200 5370 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+127.0.0.1 - - [27/Oct/2023:11:50:31 +0000] "GET / HTTP/1.1" 200 17 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+127.0.0.1 - - [27/Oct/2023:11:50:31 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
