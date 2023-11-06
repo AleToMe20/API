@@ -19,7 +19,7 @@ const databaseUrl = "mongodb://localhost:27017/myFlixDB"
 
 mongoose.connect(process.env.CONNECTION_URI || databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
-let allowedOrigins = ["http://localhost:1234"];
+/*let allowedOrigins = ["http://localhost:1234"];
  app.use(cors({
    origin: (origin, callback) => {
 
@@ -31,7 +31,8 @@ let allowedOrigins = ["http://localhost:1234"];
      return callback(null, true);
    }
  }));
-//app.use(cors());
+ */
+app.use(cors());
 
 // Parsing incoming requests
 app.use(bodyParser.json());
